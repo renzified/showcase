@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.sleepyhead.showcase.uikit.R
 import com.sleepyhead.showcase.uikit.providers.ColorFoundationMain
 import com.sleepyhead.showcase.uikit.providers.SemiBold22
 import com.sleepyhead.showcase.uikit.search.UiKitSearch
@@ -22,7 +24,7 @@ import com.sleepyhead.showcase.uikit.search.UiKitSearch
 fun UiKitAppBar(
     modifier: Modifier = Modifier,
     title: String? = null,
-    showNavigation: Boolean = false,
+    navigationButton: (@Composable () -> Unit)? = null,
     secondRow: (@Composable ColumnScope.() -> Unit)? = null
 ) {
     Box(modifier = modifier) {
@@ -35,7 +37,10 @@ fun UiKitAppBar(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
 
-                if (showNavigation) NavigationButton(modifier = Modifier.padding(start = 16.dp))
+                navigationButton?.let {
+                    Spacer(modifier = Modifier.padding(start = 16.dp))
+                    it.invoke()
+                }
 
                 if (!title.isNullOrBlank()) {
                     BasicText(
@@ -45,12 +50,9 @@ fun UiKitAppBar(
                             .padding(start = 16.dp)
                     )
                 }
-
             }
 
-            if (secondRow != null) {
-                secondRow()
-            }
+            if (secondRow != null) secondRow()
         }
     }
 }
@@ -59,7 +61,12 @@ fun UiKitAppBar(
 @Composable
 private fun PreviewUiKitAppBarAppBar() {
     Box(modifier = Modifier.background(ColorFoundationMain)) {
-        UiKitAppBar(title = "App", showNavigation = true) {
+        UiKitAppBar(
+            navigationButton = {
+                NavigationButton(icon = R.drawable.ic_close, modifier = Modifier)
+            },
+            title = "App"
+        ) {
             UiKitSearch(modifier = Modifier.padding(horizontal = 16.dp))
         }
     }

@@ -1,5 +1,6 @@
 package com.sleepyhead.showcase.uikit.appbar
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,7 +21,7 @@ import com.sleepyhead.showcase.uikit.R
 import com.sleepyhead.showcase.uikit.providers.ColorPlatinum
 
 @Composable
-fun NavigationButton(modifier: Modifier = Modifier) {
+fun NavigationButton(modifier: Modifier = Modifier, @DrawableRes icon: Int) {
     Box(
         modifier = modifier
             .size(44.dp)
@@ -38,7 +39,7 @@ fun NavigationButton(modifier: Modifier = Modifier) {
     ) {
         Box(modifier = Modifier.size(36.dp), contentAlignment = Alignment.Center) {
             Image(
-                painter = painterResource(R.drawable.ic_navigation_back),
+                painter = painterResource(icon),
                 contentDescription = null,
                 modifier = Modifier.wrapContentSize()
             )
@@ -49,5 +50,5 @@ fun NavigationButton(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun PreviewNavigationButton() {
-    NavigationButton()
+    NavigationButton(icon = R.drawable.ic_navigation_back)
 }

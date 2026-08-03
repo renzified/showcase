@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="flashcards">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-07-30T09:19:47.215206800Z">
+        <DropdownSelection timestamp="2026-08-03T01:41:34.805907Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=29241FDH2002K9" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Renz\.android\avd\Large_storage.avd" />
             </handle>
           </Target>
         </DropdownSelection>

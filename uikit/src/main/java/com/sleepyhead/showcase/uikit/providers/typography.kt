@@ -27,6 +27,22 @@ val Regular17 = TextStyle(
     lineHeight = 22.sp
 )
 
+val Regular16 = TextStyle(
+    fontSize = 16.sp,
+    fontFamily = GoogleSansFontFamily,
+    fontWeight = FontWeight.W400,
+    lineHeight = 24.sp,
+    letterSpacing = 0.22.sp
+)
+
+val MenuLabel = TextStyle(
+    fontSize = 14.sp,
+    fontFamily = GoogleSansFontFamily,
+    fontWeight = FontWeight.W500,
+    lineHeight = 20.sp,
+    letterSpacing = 0.22.sp
+)
+
 val Medium16 = TextStyle(
     fontSize = 16.sp,
     fontFamily = GoogleSansFontFamily,
