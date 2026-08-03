@@ -42,3 +42,12 @@ val Medium14 = TextStyle(
     lineHeight = 20.sp,
     letterSpacing = 0.22.sp
 )
+
+val SemiBold22 = TextStyle(
+    fontSize = 22.sp,
+    fontFamily = GoogleSansFontFamily,
+    fontWeight = FontWeight.SemiBold,
+    lineHeight = 28.sp,
+    letterSpacing = 0.36.sp
+)
+

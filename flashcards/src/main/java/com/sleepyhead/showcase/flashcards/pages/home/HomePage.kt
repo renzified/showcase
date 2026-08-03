@@ -2,23 +2,32 @@ package com.sleepyhead.showcase.flashcards.pages.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sleepyhead.showcase.uikit.appbar.UiKitAppBar
+import com.sleepyhead.showcase.uikit.button.UiKitTextButton
+import com.sleepyhead.showcase.uikit.providers.ColorBorderColor
 import com.sleepyhead.showcase.uikit.providers.ColorFoundationMain
+import com.sleepyhead.showcase.uikit.providers.ColorSurfaceAction
+import com.sleepyhead.showcase.uikit.search.UiKitSearch
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -33,17 +42,60 @@ fun HomePage() {
             .background(ColorFoundationMain)
             .windowInsetsPadding(topInset)
     ) {
-        UiKitAppBar()
+        UiKitAppBar(title = "Flashcards") {
+            UiKitSearch(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 10.dp)
+            )
 
-        LazyColumn(
+            Box(
+                modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+                    .background(ColorBorderColor)
+            )
+        }
+
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp)
+                .weight(1f)
         ) {
-            items(count = 12) {
-                HomeItem()
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(16.dp)
+            ) {
+                items(count = 12) {
+                    HomeItem()
+                }
+            }
+
+
+            Box(
+                modifier = Modifier
+                    .background(
+
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.White
+                            ),
+                            startY = 0f,
+                            endY = 24f
+                        )
+
+                    )
+                    .padding(bottom = 16.dp, top = 24.dp)
+                    .align(Alignment.BottomCenter)
+            ) {
+                UiKitTextButton(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    text = "Create",
+                    color = ColorSurfaceAction
+                )
             }
         }
     }
