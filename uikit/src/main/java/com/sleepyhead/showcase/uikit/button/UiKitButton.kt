@@ -1,6 +1,7 @@
 package com.sleepyhead.showcase.uikit.button
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,13 +20,14 @@ import com.sleepyhead.showcase.uikit.providers.ColorTextOnAction
 import com.sleepyhead.showcase.uikit.providers.Medium16
 
 @Composable
-fun UiKitTextButton(modifier: Modifier = Modifier, text: String, color: Color) {
+fun UiKitTextButton(modifier: Modifier = Modifier, text: String, color: Color, onClick: () -> Unit) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(48.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(color = color),
+            .background(color = color)
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -36,5 +38,5 @@ fun UiKitTextButton(modifier: Modifier = Modifier, text: String, color: Color) {
 @Preview
 @Composable
 private fun PreviewUiKitTextButton() {
-    UiKitTextButton(text = "Submit", color = ColorSurfaceAction)
+    UiKitTextButton(text = "Submit", color = ColorSurfaceAction, onClick = {})
 }

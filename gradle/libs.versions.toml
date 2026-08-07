@@ -13,6 +13,7 @@ kotlin = "2.4.10"
 composeBOM = "2026.06.01"
 composeActivity = "1.13.0"
 composeViewModel = "2.10.0"
+composables =  "0.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +30,7 @@ compose-activity = { group = "androidx.activity", name = "activity-compose", ver
 compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "composeViewModel" }
 compose-ui-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+composables = { group = "com.composables", name = "ui", version.ref = "composables" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
