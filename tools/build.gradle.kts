@@ -48,4 +48,9 @@ dependencies {
 
     // viewmodel
     api(libs.compose.viewmodel)
+
+    // datetime
+    api(libs.kotlinx.date.time)
+
+    api(libs.constraint.layout.compose)
 }

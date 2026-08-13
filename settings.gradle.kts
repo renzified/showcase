@@ -26,3 +26,5 @@ rootProject.name = "showcase"
 include(":flashcards")
 include(":uikit")
 include(":tools")
+include(":calendar")
+include(":calendar:demo")
