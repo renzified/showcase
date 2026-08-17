@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicText
@@ -23,14 +24,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.fastForEach
+import androidx.compose.ui.util.fastForEachIndexed
+import androidx.compose.ui.util.fastMap
 import androidx.constraintlayout.compose.ConstrainedLayoutReference
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.renzified.calendar.uimodels.UiEvent
 import com.renzified.calendar.utils.DateTimeUtils
 import com.renzified.calendar.utils.format
+import com.renzified.calendar.utils.packWeekEvents
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -59,7 +68,11 @@ fun Month(
 
     Column(modifier = modifier) {
         DayOfWeekRow(daysOfWeek = daysOfWeek.value)
-        CalendarBody(content = weeks)
+        CalendarBody(
+            content = weeks,
+            events = state.events,
+            event = { TempEvent() }
+        )
     }
 }
 
@@ -125,7 +138,64 @@ fun DayOfWeekRow(daysOfWeek: List<DayOfWeek>) {
 }
 
 @Composable
-fun ColumnScope.CalendarBody(content: Map<Int, List<LocalDate>>) {
+fun TempEvent(modifier: Modifier = Modifier) {
+    Box(modifier = modifier.height(16.dp).fillMaxWidth().background(Color.Green))
+}
+
+@Composable
+fun ColumnScope.CalendarBody(
+    weekHeight: Dp,
+    weekRange: ClosedRange<LocalDate>,
+    events: List<UiEvent>,
+    event: @Composable (UiEvent) -> Unit
+) {
+    SubcomposeLayout { constraints ->
+
+        // measure the event without limiting it to the parent size
+        val eventPlaceable = subcompose(CalendarBodySlot.EVENT, { event(UiEvent.Measurement) }).fastMap {
+            it.measure(Constraints())
+        }
+
+        // how many row can we fit in a week
+        val eventMaxSize = eventPlaceable.fold(IntSize.Zero) { currentMax, placeable ->
+            IntSize(
+                width = maxOf(currentMax.width, placeable.width),
+                height = maxOf(currentMax.height, placeable.height)
+            )
+        }
+        val maxRow = weekHeight.roundToPx() / eventMaxSize.height
+
+        val events = packWeekEvents(
+            maxRow = maxRow,
+            dates = weekRange,
+            events = events
+        )
+
+        val mainPlaceable = subcompose(CalendarBodySlot.MAIN, {  }).fastMap {
+            it.measure(constraints)
+        }
+        val maxSize = mainPlaceable.fold(IntSize.Zero) { currentMax, placeable ->
+            IntSize(
+                width = maxOf(currentMax.width, placeable.width),
+                height = maxOf(currentMax.height, placeable.height)
+            )
+        }
+
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            mainPlaceable.fastForEachIndexed { index, placeable ->
+
+            }
+        }
+    }
+}
+
+enum class CalendarBodySlot {
+    MAIN,
+    EVENT
+}
+
+@Composable
+fun ColumnScope.CalendarBody(content: Map<Int, List<LocalDate>>, events: List<UiEvent>, eventSize: Dp) {
     for ((_, dates) in content) {
         ConstraintLayout(
             modifier = Modifier
@@ -170,7 +240,7 @@ fun ColumnScope.CalendarBody(content: Map<Int, List<LocalDate>>) {
                     Day(item.day)
                 }
 
-                ConstraintLayout(
+                /*ConstraintLayout(
                     modifier = Modifier
                         .constrainAs(createRef()) {
                             start.linkTo(parent.start)
@@ -182,8 +252,15 @@ fun ColumnScope.CalendarBody(content: Map<Int, List<LocalDate>>) {
                             height = Dimension.fillToConstraints
                         }
                 ) {
+                    events
+                    *//*events.forEach { item ->
+                        packWeekEvents(
+                            maxRow =
+                        )
+                    }*//*
+                }*/
 
-                }
+
             }
         }
         Box(

@@ -14,4 +14,13 @@ sealed interface UiEvent {
     ) : UiEvent
 
     data class Time(val name: String, val timestamp: LocalDateTime) : UiEvent
+
+    data object Measurement: UiEvent
 }
+
+data class PackedEvent(val event: UiEvent, val lane: Int)
+
+data class PackedWeekEvents(
+    val drawn: List<PackedEvent>,
+    val remaining: List<UiEvent>
+)

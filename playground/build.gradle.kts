@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose.compiler)
 }
 
 android {
-    namespace = "com.renzified.calendar"
+    namespace = "com.sleepyhead.showcase.playground"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -13,17 +13,29 @@ android {
     }
 
     defaultConfig {
+        applicationId = "com.sleepyhead.showcase.playground"
         minSdk = 26
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {
         compose = true
+    }
+
+    buildTypes {
+        release {
+            optimization {
+                enable = false
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
@@ -32,8 +44,5 @@ dependencies {
     implementation(project(":uikit"))
 
     implementation(platform(libs.compose.bom))
-    testImplementation(libs.junit.jupiter)
     debugImplementation(libs.compose.ui.tooling)
-
-    testImplementation(libs.junit)
 }
