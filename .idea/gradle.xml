@@ -11,7 +11,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/calendar" />
             <option value="$PROJECT_DIR$/calendar/demo" />
+            <option value="$PROJECT_DIR$/fastmath" />
             <option value="$PROJECT_DIR$/flashcards" />
+            <option value="$PROJECT_DIR$/patterns" />
+            <option value="$PROJECT_DIR$/patterns/mvi" />
+            <option value="$PROJECT_DIR$/patterns/mvvm" />
             <option value="$PROJECT_DIR$/playground" />
             <option value="$PROJECT_DIR$/tools" />
             <option value="$PROJECT_DIR$/uikit" />

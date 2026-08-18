@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MVVM Patterns</string>
+    <string name="compose_sample">Compose MVVM</string>
+    <string name="views_sample">Views MVVM</string>
+    <string name="watchlist_views_title">Watchlist (Views)</string>
+    <string name="details_title">Details</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="sector_format">Sector: %1$s</string>
+</resources>

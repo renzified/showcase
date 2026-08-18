@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/views_nav_graph"
+    app:startDestination="@id/watchlistFragment">
+
+    <fragment
+        android:id="@+id/watchlistFragment"
+        android:name="com.sleepyhead.patterns.mvvm.views.watchlist.WatchlistFragment"
+        android:label="@string/watchlist_views_title">
+        <action
+            android:id="@+id/action_watchlist_to_detail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.sleepyhead.patterns.mvvm.views.detail.DetailFragment"
+        android:label="@string/details_title">
+        <argument
+            android:name="instrumentId"
+            app:argType="string" />
+    </fragment>
+</navigation>

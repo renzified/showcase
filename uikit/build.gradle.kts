@@ -44,5 +44,6 @@ dependencies {
     api(libs.compose.foundation)
     api(libs.compose.activity)
     api(libs.compose.ui.preview)
+    api(libs.androidx.material3)
     debugImplementation(libs.compose.ui.tooling)
 }
