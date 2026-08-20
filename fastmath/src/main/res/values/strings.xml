@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Fast Math</string>
     <string name="fast_math">Fast Math</string>
+    <string name="warm_up">WARM UP</string>
 </resources>
